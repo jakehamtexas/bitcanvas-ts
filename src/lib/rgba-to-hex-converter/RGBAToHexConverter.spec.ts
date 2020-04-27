@@ -8,7 +8,7 @@ test('returns hex from rgba', t => {
     blue: 70,
     alpha: 1
   });
-  t.is('#83A046', rgba.toHex());
+  t.is('#83A046FF', rgba.toHex());
 });
 
 test('empty constructor returns black', t => {
