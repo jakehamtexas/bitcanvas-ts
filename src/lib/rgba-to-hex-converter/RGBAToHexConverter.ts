@@ -3,6 +3,12 @@ import { throwException } from './throwException';
 import RGBA from './RGBA';
 const isValid = (colors: number[], alpha: number) =>
   colors.every(isInRange) && alpha <= 1 && alpha >= 0;
+
+const getFormattedHex = (n: number) =>
+  n
+    .toString(16)
+    .toUpperCase()
+    .padStart(2, '0');
 export class RGBAToHexConverter {
   private _red: number;
   private _green: number;
@@ -29,12 +35,10 @@ export class RGBAToHexConverter {
   public toHex(): string {
     const colors = [this._red, this._green, this._blue];
     const colorsAsHex = colors.reduce(
-      (asHex, color) => asHex + color.toString(16).toUpperCase(),
+      (asHex, color) => asHex + getFormattedHex(color),
       ''
     );
-    const alphaAsHex = Math.ceil(this._alpha * 255)
-      .toString(16)
-      .toUpperCase();
+    const alphaAsHex = getFormattedHex(Math.ceil(this._alpha * 255));
     return `#${colorsAsHex}${alphaAsHex}`;
   }
 }
