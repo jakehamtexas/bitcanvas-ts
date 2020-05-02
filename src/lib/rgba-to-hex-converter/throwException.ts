@@ -30,14 +30,14 @@ export const throwException = (
   const variableErrorMessage = ({ isAlpha, name, value }: ExceptionHelper) => {
     const indentation = '    ';
     const range = isAlpha ? '0 and 1' : '0 and 255';
-    `${indentation}Value '${value}' is invalid for '${name}'. Value must be a number between ${range}.`;
+    return `${indentation}Value '${value}' is invalid for '${name}'. Value must be a number between ${range}.`;
   };
   const errorMessage =
     'One or more values supplied for RGBA is not valid:' +
     exceptionHelpers
       .filter(helper => !helper.isValid)
       .reduce((message, helper) => {
-        return message + variableErrorMessage(helper);
-      }, '\n');
+        return message + `\n${variableErrorMessage(helper)}`;
+      }, '');
   throw new Error(errorMessage);
 };
