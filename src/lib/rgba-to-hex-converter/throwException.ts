@@ -1,9 +1,9 @@
 import { isInRange } from './isInRange';
 interface ExceptionHelper {
-  name: string;
-  isValid: boolean;
-  value: number;
-  isAlpha: boolean;
+  readonly name: string;
+  readonly isValid: boolean;
+  readonly value: number;
+  readonly isAlpha: boolean;
 }
 export const throwException = (
   red: number,
@@ -21,7 +21,7 @@ export const throwException = (
     value,
     isAlpha
   });
-  const exceptionHelpers = [
+  const exceptionHelpers: ReadonlyArray<any> = [
     getExceptionHelper('red', red),
     getExceptionHelper('green', green),
     getExceptionHelper('blue', blue),

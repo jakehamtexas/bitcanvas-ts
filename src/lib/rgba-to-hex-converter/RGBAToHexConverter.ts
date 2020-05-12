@@ -1,7 +1,7 @@
+import IRGBA from './IRGBA';
 import { isInRange } from './isInRange';
 import { throwException } from './throwException';
-import RGBA from './RGBA';
-const isValid = (colors: number[], alpha: number) =>
+const isValid = (colors: readonly number[], alpha: number) =>
   colors.every(isInRange) && alpha <= 1 && alpha >= 0;
 
 const getFormattedHex = (n: number) =>
@@ -10,12 +10,12 @@ const getFormattedHex = (n: number) =>
     .toUpperCase()
     .padStart(2, '0');
 export class RGBAToHexConverter {
-  private _red: number;
-  private _green: number;
-  private _blue: number;
-  private _alpha: number;
+  private readonly _red: number;
+  private readonly _green: number;
+  private readonly _blue: number;
+  private readonly _alpha: number;
   constructor(
-    { red = 0, green = 0, blue = 0, alpha = 1 }: RGBA = {
+    { red = 0, green = 0, blue = 0, alpha = 1 }: IRGBA = {
       red: 0,
       green: 0,
       blue: 0,
@@ -33,7 +33,7 @@ export class RGBAToHexConverter {
   }
 
   public toHex(): string {
-    const colors = [this._red, this._green, this._blue];
+    const colors: ReadonlyArray<any> = [this._red, this._green, this._blue];
     const colorsAsHex = colors.reduce(
       (asHex, color) => asHex + getFormattedHex(color),
       ''

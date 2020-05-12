@@ -1,4 +1,5 @@
+import IRGBA from './IRGBA';
+import { RGBA } from './RGBA';
 import { RGBAToHexConverter } from './RGBAToHexConverter';
-import RGBA from './RGBA';
 
-export { RGBAToHexConverter, RGBA };
+export { RGBAToHexConverter, IRGBA, RGBA };
