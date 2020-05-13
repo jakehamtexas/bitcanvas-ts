@@ -1,21 +1,15 @@
 import { BitMapMember } from '.';
+import { drawBits } from './drawBits';
+import { canReduce, getReduced } from './reduce';
 
-const getCanReduce = (bitMap: BitMapMember[][]): boolean => {
-  return !!bitMap;
-};
-
-const getReduced = (bitMap: BitMapMember[][]) => {
-  return bitMap;
-};
 export default class BitMapToCanvas {
   public bitMap: BitMapMember[][];
-  constructor(bitMap: BitMapMember[][] = new Array<Array<BitMapMember>>()) {
+  constructor(bitMap: BitMapMember[][] = new Array<BitMapMember[]>()) {
     this.bitMap = bitMap;
   }
 
   public Normalize(): BitMapToCanvas {
-    const canReduce = getCanReduce(this.bitMap);
-    if (canReduce) {
+    if (canReduce(this.bitMap)) {
       this.bitMap = getReduced(this.bitMap);
       this.Normalize();
       return this;
@@ -23,9 +17,14 @@ export default class BitMapToCanvas {
     return this;
   }
 
-  public ToCanvas(): CanvasRenderingContext2D {
+  public ToCanvas(
+    imgHeightInPx: number,
+    imgWidthInPx: number
+  ): HTMLCanvasElement {
     const canvas = document.createElement('canvas') as HTMLCanvasElement;
     const context = canvas.getContext('2d') || new CanvasRenderingContext2D();
-    return context;
+    context.beginPath();
+    this.bitMap.forEach(drawBits(context, imgHeightInPx, imgWidthInPx));
+    return canvas;
   }
 }

@@ -20,7 +20,7 @@ test('normalize does not reduce irreducable square matrices', t => {
   const irreducable = [
     [0, 0, 1, 0],
     [0, 0, 1, 1],
-    [1, 1, 0, 0],
+    [1, 1, 0, 1],
     [1, 1, 0, 0]
   ];
   const bitMapToCanvas = new BitMapToCanvas(irreducable.map(arr => [...arr]));

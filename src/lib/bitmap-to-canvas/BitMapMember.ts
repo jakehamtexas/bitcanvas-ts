@@ -1,3 +1,3 @@
-import { RGBA } from '../..';
+import { IRGBA } from '../..';
 
-export type BitMapMember = number | string | RGBA;
+export type BitMapMember = number | string | IRGBA;
